@@ -1,4 +1,5 @@
 # Next.js Frontend Deployment Guide - Vercel
+#  ------------ Nota. el proyecto en google cloud es "goal-planing-agent" no adk-fullstack-deploy-tutorial  ------------
 
 ## Overview
 This guide explains how to deploy your Next.js frontend to Vercel and configure it to connect to your deployed ADK agent backend. The frontend automatically detects the deployment environment and configures endpoints accordingly.

@@ -83,12 +83,6 @@ class AgentConfiguration:
 
         # Set staging bucket (required for Agent Engine deployment)
         self.staging_bucket = os.environ.get("GOOGLE_CLOUD_STAGING_BUCKET")
-        if not self.staging_bucket:
-            raise ValueError(
-                "❌ Missing GOOGLE_CLOUD_STAGING_BUCKET environment variable!\n"
-                "This is required for Agent Engine deployment.\n"
-                "Please add it to your .env file."
-            )
 
     @property
     def internal_agent_name(self) -> str:
