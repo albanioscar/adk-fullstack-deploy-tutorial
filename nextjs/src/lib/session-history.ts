@@ -171,31 +171,29 @@ export class AdkSessionService {
           };
         }
 
-        const sessions: AdkSession[] = rawSessions.map(
-          (session: {
+        const sessions: AdkSession[] = rawSessions
+          .filter((session) => session && session.name) // Filter out sessions without a name
+          .map((session: {
             name?: string;
             createTime?: string;
             updateTime?: string;
             userId?: string;
           }) => {
             // Extract session ID from name field: "projects/.../sessions/SESSION_ID"
-            const sessionId = session.name
-              ? session.name.split("/sessions/")[1]
-              : null;
+            const sessionId = session.name!.split("/sessions/")[1];
 
             return {
               id: sessionId,
               app_name: getAdkAppName(), // Add app_name for compatibility
-              user_id: session.userId,
+              user_id: session.userId as string, // Assert as string
               state: null,
-              last_update_time: session.updateTime || session.createTime,
+              last_update_time: session.updateTime || session.createTime || null,
               // Keep original fields for reference
               name: session.name,
               createTime: session.createTime,
               updateTime: session.updateTime,
             };
-          }
-        );
+          });
 
         return {
           sessions: Array.isArray(sessions) ? sessions : [],
