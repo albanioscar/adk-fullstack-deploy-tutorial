@@ -133,13 +133,44 @@ export class AdkSessionService {
         });
 
         if (!response.ok) {
-          throw new Error(`Failed to list sessions: ${response.statusText}`);
+          const errorText = await response.text();
+          console.error(
+            "❌ [ADK SESSION SERVICE] Agent Engine listSessions API error:",
+            {
+              status: response.status,
+              statusText: response.statusText,
+              body: errorText,
+            }
+          );
+          throw new Error(
+            `Failed to list sessions: ${response.status} ${response.statusText} - ${errorText}`
+          );
         }
 
         const responseData = await response.json();
 
+        // Log the actual response from the API for debugging
+        console.log(
+          "📄 [ADK SESSION SERVICE] Agent Engine listSessions raw response:",
+          JSON.stringify(responseData, null, 2)
+        );
+
         // Agent Engine sessions API returns sessions with 'name' field, need to extract ID
         const rawSessions = responseData.sessions || responseData || [];
+
+        // CRITICAL FIX: Ensure rawSessions is an array before mapping
+        if (!Array.isArray(rawSessions)) {
+          console.error(
+            "❌ [ADK SESSION SERVICE] API response is not an array:",
+            rawSessions
+          );
+          // Return empty state to prevent crash
+          return {
+            sessions: [],
+            sessionIds: [],
+          };
+        }
+
         const sessions: AdkSession[] = rawSessions.map(
           (session: {
             name?: string;

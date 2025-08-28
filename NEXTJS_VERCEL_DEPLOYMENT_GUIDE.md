@@ -25,11 +25,11 @@ The frontend automatically detects which backend type to use based on available 
 **Required Variables:**
 ```bash
 # Google Cloud Configuration
-GOOGLE_CLOUD_PROJECT=your-project-id
-REASONING_ENGINE_ID=your-reasoning-engine-id
-GOOGLE_SERVICE_ACCOUNT_KEY_BASE64=your-base64-encoded-service-account-key
-ADK_APP_NAME=your-adk-app-name
-AGENT_ENGINE_ENDPOINT=your-agent-engine-endpoint
+GOOGLE_CLOUD_PROJECT=goal-planing-agent-23736
+REASONING_ENGINE_ID=5522389509481693184
+GOOGLE_SERVICE_ACCOUNT_KEY_BASE64=118de1af74a853816b9fd43b36522b6fffaccceb
+ADK_APP_NAME=goal-planning-agent
+AGENT_ENGINE_ENDPOINT=https://us-central1-aiplatform.googleapis.com/v1/projects/goal-planing-agent-23736/locations/us-central1/reasoningEngines/5522389509481693184
 GOOGLE_CLOUD_LOCATION=us-central1
 ```
 
